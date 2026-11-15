@@ -18,10 +18,7 @@ app.use((req, res, next) => {
 app.all('*', async (req, res) => {
   try {
     const cleanPath = req.originalUrl.replace(/^\/+/, '');
-
-    const groqPath = cleanPath.replace(/^openai\//, '');
-
-    const targetUrl = `https://api.groq.com/openai/v1/${groqPath}`;
+    const targetUrl = `https://api.groq.com/${cleanPath}`;
 
     const authHeader = req.headers.authorization || (process.env.GROQ_API_KEY ? `Bearer ${process.env.GROQ_API_KEY}` : '');
 
